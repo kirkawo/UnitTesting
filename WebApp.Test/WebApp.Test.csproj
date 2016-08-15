@@ -91,6 +91,7 @@
   </Choose>
   <ItemGroup>
     <Compile Include="AlexeyTestController.cs" />
+    <Compile Include="ATestController.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
