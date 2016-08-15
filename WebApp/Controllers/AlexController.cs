@@ -10,7 +10,7 @@ using WebApp.Entities;
 namespace WebApp.Controllers
 {
     [Route("api/[controller]")]
-    public class AlexeyTestController : ApiController
+    public class AlexController : ApiController
     {
         #region Fields
         private IRepositoryServise _repository;
@@ -23,7 +23,7 @@ namespace WebApp.Controllers
         #endregion
 
         #region CTOR
-        public AlexeyTestController(IRepositoryServise repository)
+        public AlexController(IRepositoryServise repository)
         {
             _repository = repository;
         }
