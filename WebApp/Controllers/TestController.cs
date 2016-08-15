@@ -13,7 +13,7 @@ namespace WebApp.Controllers
     public class TestController : ApiController
     {
         #region Fields
-        private IRepositoryServise repository;
+        private IRepositoryServise _repository;
         private List<TestModel> mockObj = new List<TestModel>()
         {
             new TestModel {Id = 1, Title = "Title 1", Body = "Body 1" },
@@ -25,7 +25,7 @@ namespace WebApp.Controllers
         #region CTOR
         public TestController(IRepositoryServise repository)
         {
-            this.repository = repository;
+            _repository = repository;
         }
         #endregion
 
@@ -33,28 +33,40 @@ namespace WebApp.Controllers
         // GET api/<controller>
         public IEnumerable<TestModel> Get()
         {
-            return mockObj;
+            return _repository.GetAllTestModels();
         }
 
         // GET api/<controller>/5
-        public string Get(int id)
+        public TestModel Get(int id)
         {
-            return "value";
+            return _repository.GetTestModelById(id);
         }
 
         // POST api/<controller>
         public void Post([FromBody]TestModel value)
         {
+            if(ModelState.IsValid)
+            {
+                _repository.InsertTestModel(value);
+            }
         }
 
         // PUT api/<controller>/5
         public void Put([FromBody]TestModel value)
         {
+            if (ModelState.IsValid)
+            {
+                _repository.UpdateTestModel(value);
+            }
         }
 
         // DELETE api/<controller>/5
-        public void Delete(int id)
+        public void Delete(TestModel model)
         {
+            if (ModelState.IsValid)
+            {
+                _repository.DeleteTestModel(model);
+            }
         }
         #endregion
     }

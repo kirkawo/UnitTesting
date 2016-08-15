@@ -10,6 +10,7 @@ namespace WebApp.Interfaces
     public interface IRepositoryServise
     {
         IEnumerable<TestModel> GetAllTestModels();
+        TestModel GetTestModelById(int Id);
 
         void DeleteTestModel(TestModel testModel);
 

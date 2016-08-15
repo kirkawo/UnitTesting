@@ -25,6 +25,11 @@ namespace WebApp.Services
             throw new NotImplementedException();
         }
 
+        public TestModel GetTestModelById(int Id)
+        {
+            throw new NotImplementedException();
+        }
+
         public void InsertTestModel(IEnumerable<TestModel> testModels)
         {
             throw new NotImplementedException();
