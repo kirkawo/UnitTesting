@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Threading.Tasks;
 using System.Web.Http;
 using WebApp.Entities;
 using WebApp.Interfaces;
@@ -36,9 +37,14 @@ namespace WebApp.Controllers
         }
 
         // GET api/<controller>/5
-        public TestModel Get(int id)
+        public IHttpActionResult Get(int id)
         {
-            return _repository.GetTestModelById(id);
+            return Ok(_repository.GetTestModelById(id));
+        }
+
+        public async Task<IHttpActionResult> GetAsync(int id)
+        {
+            return await Task.FromResult(Get(id));
         }
 
         // POST api/<controller>
