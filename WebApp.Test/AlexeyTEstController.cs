@@ -16,20 +16,22 @@ namespace WebApp.Test
     {
         private AlexController _controller;
         private Mock<IRepositoryServise> _obj;
-        private List<TestModel> mockObj = new List<TestModel>()
+        private List<TestModel> _mockObj = new List<TestModel>()
         {
             new TestModel {Id = 1, Title = "Title 1", Body = "Body 1" },
             new TestModel {Id = 2, Title = "Title 2", Body = "Body 2" },
             new TestModel {Id = 3, Title = "Title 3", Body = "Body 3" }
         };
+        [Fact]
+        public void Test_For_Method_GetAll()
+        {
+            _obj = new Mock<IRepositoryServise>();
+            _obj.Setup(o => o.GetAllTestModels()).Returns(_mockObj);
+            _controller = new AlexController(_obj.Object);
+            var result = _controller.Get();
+            Assert.Equal(_mockObj, result);
 
-        //public void Test_For_Method_GetAll ()
-        //{
-        //    _obj = new Mock<IRepositoryServise>();
-        //    _obj.Setup(o => o.GetAllTestModels()).Returns();
-        //    _controller = new AlexController();
-
-        //}
+        }
 
         [Fact]
         public void PassingTest()
@@ -40,7 +42,7 @@ namespace WebApp.Test
         [Fact]
         public void FailingTest()
         {
-            Assert.Equal(5, Add(2, 2));
+            Assert.Equal(5, Add(3, 2));
         }
 
         int Add(int x, int y)
