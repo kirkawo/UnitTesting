@@ -16,15 +16,11 @@ namespace WebApp.Test
     {
         private AlexController _controller;
         private Mock<IRepositoryServise> _obj;
-        private List<TestModel> _mockObj = new List<TestModel>()
-        {
-            new TestModel {Id = 1, Title = "Title 1", Body = "Body 1" },
-            new TestModel {Id = 2, Title = "Title 2", Body = "Body 2" },
-            new TestModel {Id = 3, Title = "Title 3", Body = "Body 3" }
-        };
+    
         [Fact]
         public void Test_For_Method_GetAll()
         {
+            var _mockObj = GetCollection();
             _obj = new Mock<IRepositoryServise>();
             _obj.Setup(o => o.GetAllTestModels()).Returns(_mockObj);
             _controller = new AlexController(_obj.Object);
@@ -32,22 +28,31 @@ namespace WebApp.Test
             Assert.Equal(_mockObj, result);
 
         }
-
         [Fact]
-        public void PassingTest()
+        public void Test_For_Method_GetById()
         {
-            Assert.Equal(4, Add(2, 2));
+            int Id = 2;
+            var _mockObj = GetCollection();
+            _obj = new Mock<IRepositoryServise>();
+            _obj.Setup(o => o.GetTestModelById(Id)).Returns(_mockObj.Find(obj => obj.Id == Id)
+            );
+            _controller = new AlexController(_obj.Object);
+            var result = _controller.Get(Id);
+
+            var objCompare = _mockObj.Find(o => o.Id == Id);
+            Assert.Equal(objCompare, result);
         }
 
-        [Fact]
-        public void FailingTest()
+        #region Static collection for mock objects
+        private static List<TestModel> GetCollection ()
         {
-            Assert.Equal(5, Add(3, 2));
-        }
-
-        int Add(int x, int y)
+            return new List<TestModel>()
         {
-            return x + y;
+            new TestModel {Id = 1, Title = "Title 1", Body = "Body 1" },
+            new TestModel {Id = 2, Title = "Title 2", Body = "Body 2" },
+            new TestModel {Id = 3, Title = "Title 3", Body = "Body 3" }
+        };
         }
+        #endregion
     }
 }
