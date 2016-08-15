@@ -23,6 +23,11 @@ namespace WebApp.Controllers
         #endregion
 
         #region CTOR
+
+        public AlexController()
+        {
+
+        }
         public AlexController(IRepositoryServise repository)
         {
             _repository = repository;
